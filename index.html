@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>PirelliEcoReports – Archivio Report di Sostenibilità</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg-soft: #111827;
+            --surface: #020617;
+            --surface-alt: #0b1220;
+            --accent: #22c55e;
+            --accent-soft: rgba(34, 197, 94, 0.16);
+            --accent-strong: #4ade80;
+            --danger: #ef4444;
+            --text: #e5e7eb;
+            --text-soft: #9ca3af;
+            --border-subtle: #1f2937;
+            --radius-xl: 18px;
+            --radius-pill: 999px;
+            --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+            --shadow-chip: 0 0 0 1px rgba(148, 163, 184, 0.35);
+            --transition-fast: 180ms ease-out;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #1f2937, #020617 60%);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem 3rem;
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.16), transparent 55%),
+                        radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.16), transparent 55%),
+                        linear-gradient(145deg, #020617, #020617);
+            border-radius: 26px;
+            padding: 1.65rem 1.5rem 1.75rem;
+            margin-bottom: 1.75rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 120% 0, rgba(248, 250, 252, 0.12), transparent 60%);
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.9rem;
+            border-radius: var(--radius-pill);
+            background-color: rgba(15, 23, 42, 0.86);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            box-shadow: var(--shadow-chip);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+            width: fit-content;
+        }
+
+        .hero-kicker-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: radial-gradient(circle, var(--accent) 0, #15803d 50%, #22c55e 100%);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
+        }
+
+        .brand-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: -10.2rem;
+        }
+
+        /* LOGO HERO PIÙ GRANDE */
+        .brand-mark {
+            height: 215px;
+            width: auto;
+            flex-shrink: 0;
+            margin-top: 96px;
+            margin-bottom: -86px;
+        }
+
+        .hero-title {
+            font-size: clamp(1.7rem, 3vw, 2.1rem);
+            font-weight: 650;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-title span {
+            background: linear-gradient(120deg, var(--accent-strong), #4ade80);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-soft);
+            max-width: 640px;
+            margin-top: 0.35rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            font-size: 0.78rem;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-soft);
+        }
+
+        .chip-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background-color: var(--accent-strong);
+        }
+
+        /* ---------- FILTER BAR ---------- */
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            background: rgba(15, 23, 42, 0.93);
+            border-radius: 18px;
+            padding: 0.85rem 0.9rem;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex: 1;
+            min-width: 210px;
+        }
+
+        .toolbar-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--text-soft);
+            white-space: nowrap;
+        }
+
+        .toolbar-input,
+        .toolbar-select {
+            flex: 1;
+            border-radius: 999px;
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            background-color: #020617;
+            color: var(--text);
+            padding: 0.55rem 0.9rem;
+            font-size: 0.86rem;
+            outline: none;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .toolbar-input:focus,
+        .toolbar-select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.6);
+            background-color: #020617;
+            transform: translateY(-1px);
+        }
+
+        .toolbar-badge {
+            font-size: 0.78rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-soft);
+            white-space: nowrap;
+        }
+
+        /* ---------- GRID & CARDS ---------- */
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.1rem;
+        }
+
+        .report-card {
+            background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.7), #020617);
+            border-radius: var(--radius-xl);
+            padding: 1.05rem 1rem 1rem;
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+        }
+
+        .report-card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.18), transparent 55%);
+            opacity: 0;
+            transition: opacity 220ms ease-out;
+            pointer-events: none;
+        }
+
+        .report-card:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
+            border-color: rgba(74, 222, 128, 0.75);
+            background: radial-gradient(circle at top left, rgba(22, 163, 74, 0.18), #020617 55%);
+        }
+
+        .report-card:hover::before {
+            opacity: 1;
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.4rem;
+        }
+
+        .logo-pill {
+            height: 30px;
+            min-width: 30px;
+            max-width: 110px;
+            border-radius: 999px;
+            background: #000;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px 8px;
+            box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.85);
+        }
+
+        .logo-pill img {
+            width: -webkit-fill-available;
+            height: -webkit-fill-available;
+            object-fit: cover;
+        }
+
+        .card-title-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .company-name {
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .company-report {
+            font-size: 0.8rem;
+            color: var(--text-soft);
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 0.2rem;
+        }
+
+        .badge {
+            padding: 0.15rem 0.55rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.71rem;
+            border: 1px solid rgba(75, 85, 99, 0.8);
+            color: var(--text-soft);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .badge--sector {
+            border-color: rgba(34, 197, 94, 0.7);
+            color: var(--accent-strong);
+            background: var(--accent-soft);
+        }
+
+        .badge--year {
+            border-color: rgba(59, 130, 246, 0.7);
+            background: rgba(37, 99, 235, 0.16);
+        }
+
+        .badge--country {
+            border-style: dashed;
+        }
+
+        .card-description {
+            font-size: 0.82rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+        }
+
+        .pill-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 0.1rem;
+            font-size: 0.73rem;
+        }
+
+        .metric-pill {
+            padding: 0.25rem 0.55rem;
+            border-radius: var(--radius-pill);
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            color: var(--text-soft);
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-top: 0.8rem;
+        }
+
+        .button-row {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: var(--radius-pill);
+            padding: 0.45rem 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: transform 140ms ease-out, box-shadow 140ms ease-out, background-color 140ms ease-out, border-color 140ms ease-out;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(115deg, var(--accent), #22c55e);
+            color: #022c22;
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 40px rgba(34, 197, 94, 0.55);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-soft);
+            border: 1px solid rgba(75, 85, 99, 0.9);
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(148, 163, 184, 0.9);
+            background: rgba(15, 23, 42, 0.9);
+            transform: translateY(-1px);
+        }
+
+        .btn-icon {
+            font-size: 1rem;
+            line-height: 0;
+        }
+
+        .card-tagline {
+            font-size: 0.72rem;
+            color: var(--text-soft);
+            opacity: 0.9;
+            display: none;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+
+        @media (min-width: 720px) {
+            .hero-inner {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .hero-copy {
+                max-width: 580px;
+            }
+            .hero-side {
+                text-align: right;
+            }
+        }
+
+        @media (max-width: 640px) {
+            main {
+                padding-inline: 1rem;
+            }
+            .hero {
+                padding-inline: 1.25rem;
+            }
+            .toolbar {
+                padding-inline: 0.8rem;
+            }
+            .card-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* ---------- NO RESULTS ---------- */
+
+        .no-results {
+            margin-top: 1.5rem;
+            padding: 1rem 1.1rem;
+            border-radius: 16px;
+            border: 1px dashed rgba(148, 163, 184, 0.55);
+            background: rgba(15, 23, 42, 0.95);
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .no-results strong {
+            color: var(--accent-strong);
+        }
+    </style>
+</head>
+<body>
+<main>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <div class="hero-kicker">
+                    <span class="hero-kicker-dot"></span>
+                    PirelliEcoReports · Archivio Sostenibilità
+                </div>
+
+                <div class="brand-row">
+                    <img src="pirelli-logo.png" alt="Logo Pirelli" class="brand-mark">
+                    <h1 class="hero-title" id="hero-title">
+                        <span>PirelliEcoReports</span><br>
+                        Evoluzione della sostenibilità Pirelli 2015–2024
+                    </h1>
+                </div>
+
+                <p class="hero-subtitle">
+                    Interfaccia web dedicata all’analisi dei report annuali di Pirelli.  
+                    La pagina consente di esplorare, filtrare e scaricare i bilanci di sostenibilità
+                    e i report annuali della società, per studiare l’evoluzione delle politiche ESG nel tempo.
+                </p>
+                <div class="hero-meta" aria-label="Metadati progetto">
+                    <span class="chip">
+                        <span class="chip-dot" aria-hidden="true"></span>
+                        Progetto PW – Tecnologia Web per la Sostenibilità d’Impresa
+                    </span>
+                    <span class="chip">
+                        Azienda: Pirelli · Settore: Manifattura &amp; Automotive
+                    </span>
+                </div>
+            </div>
+            <div class="hero-side">
+                <div class="toolbar-badge">
+                    10 report · 2015 – 2024<br>
+                    <span style="font-size:0.7rem;color:var(--text-soft);">
+                        Download diretto PDF · Consultazione offline
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOOLBAR FILTRI -->
+    <section class="toolbar" aria-label="Filtri di ricerca">
+        <div class="toolbar-group">
+            <label for="search" class="toolbar-label">Cerca nel repository</label>
+            <input id="search" class="toolbar-input" type="search"
+                   placeholder="Cerca per anno, parole chiave ESG, note di bilancio…">
+        </div>
+        <div class="toolbar-group">
+            <label for="period" class="toolbar-label">Periodo</label>
+            <select id="period" class="toolbar-select">
+                <option value="all">Tutti gli anni (2015–2024)</option>
+                <option value="early">2015 – 2017</option>
+                <option value="mid">2018 – 2020</option>
+                <option value="recent">2021 – 2024</option>
+            </select>
+        </div>
+        <div class="toolbar-group" style="flex:0 0 auto; justify-content:flex-end;">
+            <span class="toolbar-badge" id="counter">
+                10 report disponibili
+            </span>
+        </div>
+    </section>
+
+    <!-- GRID REPORT -->
+    <section aria-label="Report Pirelli">
+        <div class="reports-grid" id="reportsGrid">
+
+            <!-- 2015 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2015"
+                     data-period="early"
+                     data-year="2015"
+                     data-keywords="2015 bilancio annuale sostenibilita governance avvio percorso esg">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2015 – Bilancio e Sostenibilità</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2015</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Report che documenta la strategia industriale e i primi passi strutturati
+                    di Pirelli sui temi ambientali, sociali e di governance (ESG).
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Struttura di governance</span>
+                    <span class="metric-pill">Gestione rischi</span>
+                    <span class="metric-pill">Primi indicatori ESG</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="2425_AnnualReport_2015_ita.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2015
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Punto di partenza per l’analisi storica di PirelliEcoReports.
+                    </span>
+                </div>
+            </article>
+
+            <!-- 2016 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2016"
+                     data-period="early"
+                     data-year="2016"
+                     data-keywords="2016 annual report 2016 sostenibilita consolidamento">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2016 – Bilancio Integrato</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2016</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Report di transizione con ulteriore integrazione tra risultati economici
+                    e performance ambientali e sociali.
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Integrazione bilancio–sostenibilità</span>
+                    <span class="metric-pill">Stakeholder engagement</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="3217_ITA_Pirelli_AnnualReport_10_FINAL_10-08.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2016
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Utile per confrontare i primi anni di reporting integrato.
+                    </span>
+                </div>
+            </article>
+
+            <!-- 2017 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2017"
+                     data-period="early"
+                     data-year="2017"
+                     data-keywords="2017 annual report sostenibilita consolidamento strategie industriali">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2017</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2017</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Descrive il consolidamento del modello di business focalizzato su pneumatici
+                    ad alto valore e sull’innovazione tecnologica.
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Pneumatici High Value</span>
+                    <span class="metric-pill">Innovazione prodotti</span>
+                    <span class="metric-pill">Responsabilità di filiera</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="3269_PIRELLI_ANNUAL_REPORT_2017_ITA.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2017
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Riferimento per l’evoluzione del portafoglio sostenibile.
+                    </span>
+                </div>
+            </article>
+
+            <!-- 2018 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2018"
+                     data-period="mid"
+                     data-year="2018"
+                     data-keywords="2018 annual report 2018 sostenibilita digitalizzazione mobilita">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2018</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2018</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Introduce con maggiore evidenza il ruolo della digitalizzazione e dei
+                    servizi connessi alla mobilità sostenibile.
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Digitalizzazione</span>
+                    <span class="metric-pill">Servizi per la mobilità</span>
+                    <span class="metric-pill">Performance ESG</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="5342_Pirelli_Annual_Report_2018_IT.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2018
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Anno chiave per l’integrazione tra prodotto e servizio.
+                    </span>
+                </div>
+            </article>
+
+            <!-- 2019 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2019"
+                     data-period="mid"
+                     data-year="2019"
+                     data-keywords="2019 climate change cambiamento climatico economia circolare">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2019</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2019</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Approfondisce i temi del cambiamento climatico, dell’economia circolare
+                    e del rapporto con gli stakeholder.
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Climate strategy</span>
+                    <span class="metric-pill">Economia circolare</span>
+                    <span class="metric-pill">Stakeholder engagement</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="PIRELLI_ANNUAL_REPORT_2019_ITA.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2019
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Utile per confrontare pre e post-pandemia.
+                    </span>
+                </div>
+            </article>
+
+            <!-- 2020 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2020"
+                     data-period="mid"
+                     data-year="2020"
+                     data-keywords="2020 covid pandemia resilienza catena di fornitura">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2020 (interattivo)</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2020</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Report interattivo che racconta la gestione della crisi COVID-19
+                    e le misure di resilienza adottate da Pirelli.
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Gestione emergenza</span>
+                    <span class="metric-pill">Salute e sicurezza</span>
+                    <span class="metric-pill">Resilienza della supply chain</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="PIRELLI_ANNUAL_REPORT_2020_ITA_INTERATTIVO.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2020
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Esempio di reporting digitale in contesto di crisi.
+                    </span>
+                </div>
+            </article>
+
+            <!-- 2021 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2021"
+                     data-period="recent"
+                     data-year="2021"
+                     data-keywords="2021 ripartenza transizione energetica innovazione">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2021</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2021</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Anno di ripartenza, con attenzione alla transizione energetica,
+                    all’innovazione di prodotto e alla mobilità elettrica.
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Transizione energetica</span>
+                    <span class="metric-pill">Mobilità elettrica</span>
+                    <span class="metric-pill">Innovazione R&amp;S</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="AR21_ITA_MONTATO_INTERATTIVO_0509_72dpi.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2021
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Ponte tra fase emergenziale e nuova normalità.
+                    </span>
+                </div>
+            </article>
+
+            <!-- 2022 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2022"
+                     data-period="recent"
+                     data-year="2022"
+                     data-keywords="2022 net zero obiettivi climatici innovazione di processo">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2022</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2022</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Il report completa il percorso di integrazione degli obiettivi climatici
+                    di lungo periodo con la strategia industriale.
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Obiettivi Net Zero</span>
+                    <span class="metric-pill">Efficienza energetica</span>
+                    <span class="metric-pill">Innovazione di processo</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="AR22_ITA_COMPLETO_INTERATTIVO.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2022
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Riferimento per la strategia clima–industria di Pirelli.
+                    </span>
+                </div>
+            </article>
+
+            <!-- 2023 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2023"
+                     data-period="recent"
+                     data-year="2023"
+                     data-keywords="2023 sostenibilita avanzata supply chain trasparenza">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2023</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2023</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Approfondisce la trasparenza di filiera, la gestione delle materie prime
+                    e la misurazione degli impatti lungo il ciclo di vita del prodotto.
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Supply chain responsabile</span>
+                    <span class="metric-pill">LCA prodotti</span>
+                    <span class="metric-pill">Trasparenza dati ESG</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="PIRELLI_ANNUAL_REPORT_2023_ITA.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2023
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Base per il confronto con gli obiettivi 2024.
+                    </span>
+                </div>
+            </article>
+
+            <!-- 2024 -->
+            <article class="report-card"
+                     data-name="pirelli annual report 2024"
+                     data-period="recent"
+                     data-year="2024"
+                     data-keywords="2024 sostenibilita avanzata innovazione mobilita elettrica obiettivi 2030">
+                <div class="report-header">
+                    <div class="logo-pill" aria-hidden="true">
+                        <img src="pirelli-logo.png" alt="">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="company-name">Pirelli</h2>
+                        <p class="company-report">Annual Report 2024</p>
+                        <div class="badge-row">
+                            <span class="badge badge--sector">Settore: Manifattura &amp; Automotive</span>
+                            <span class="badge badge--year">Anno: 2024</span>
+                            <span class="badge badge--country">Paese: Italia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Sintetizza lo stato più recente degli obiettivi ESG, l’evoluzione
+                    della mobilità sostenibile e le traiettorie verso il 2030.
+                </p>
+                <div class="pill-metrics">
+                    <span class="metric-pill">Target 2030</span>
+                    <span class="metric-pill">Mobilità sostenibile</span>
+                    <span class="metric-pill">Innovazione continua</span>
+                </div>
+
+                <div class="card-footer">
+                    <div class="button-row">
+                        <a class="btn btn-primary"
+                           href="PIRELLI_ANNUAL_REPORT_2024_ITA.pdf"
+                           target="_blank">
+                            <span class="btn-icon">📄</span>
+                            Scarica PDF 2024
+                        </a>
+                    </div>
+                    <span class="card-tagline">
+                        Report di riferimento per la fotografia più aggiornata di Pirelli.
+                    </span>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="no-results" id="noResults">
+            <strong>Nessun report trovato.</strong>
+            <br>
+            Prova a modificare il testo di ricerca o a selezionare un altro periodo.
+        </div>
+    </section>
+</main>
+
+<script>
+    (function () {
+        const searchInput = document.getElementById('search');
+        const periodSelect = document.getElementById('period');
+        const grid = document.getElementById('reportsGrid');
+        const cards = Array.from(grid.querySelectorAll('.report-card'));
+        const counter = document.getElementById('counter');
+        const noResults = document.getElementById('noResults');
+
+        function normalizza(str) {
+            return (str || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, '');
+        }
+
+        function applicaFiltri() {
+            const query = normalizza(searchInput.value);
+            const periodo = periodSelect.value;
+
+            let visibili = 0;
+
+            cards.forEach(card => {
+                const cardPeriodo = card.dataset.period;
+                const searchable = normalizza(
+                    card.dataset.name + ' ' +
+                    card.dataset.year + ' ' +
+                    card.dataset.keywords + ' ' +
+                    card.textContent
+                );
+
+                const matchPeriodo = (periodo === 'all' || periodo === cardPeriodo);
+                const matchTesto = !query || searchable.includes(query);
+
+                const mostra = matchPeriodo && matchTesto;
+
+                card.style.display = mostra ? '' : 'none';
+                if (mostra) visibili++;
+            });
+
+            counter.textContent = visibili + (visibili === 1 ? ' report trovato' : ' report disponibili');
+            noResults.style.display = visibili === 0 ? 'block' : 'none';
+        }
+
+        searchInput.addEventListener('input', applicaFiltri);
+        periodSelect.addEventListener('change', applicaFiltri);
+    })();
+</script>
+</body>
+</html>
